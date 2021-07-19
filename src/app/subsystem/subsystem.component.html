@@ -1,0 +1,4 @@
+<div (cdkDropListDropped)="moveConstant($event)" [cdkDropListData]="constantsArray" cdkDropList>
+  <app-constant *ngFor="let constant of constantsArray" [constant]="constant" cdkDrag
+                style="margin-top: 16px"></app-constant>
+</div>

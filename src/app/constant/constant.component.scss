@@ -1,0 +1,35 @@
+.custom-background {
+  background: transparent
+}
+
+.range-input {
+  border-width: 0 0 1px;
+  border-color: #DADADA;
+  font-size: 14px;
+  text-align: left;
+  letter-spacing: 0;
+  color: #323A47;
+  padding-bottom: 5px;
+  width: 42px;
+}
+
+.chevron {
+  //margin-right: 32px;
+  margin-top: 10px;
+  opacity: 25%;
+
+}
+
+$form-range-track-bg: rgba(0, 0, 0, 1.0);
+.arrows {
+  //width: 5%;
+  width: 15%;
+  height: 15%;
+  padding-right: 10px;
+  padding-top: 5px;
+  vertical-align: middle;
+  display: inline-block;
+  float: left;
+}
+
+

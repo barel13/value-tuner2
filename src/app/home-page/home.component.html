@@ -1,0 +1,13 @@
+<div class="testimonial-group">
+  <div class="row text-center" style="margin-left: 32px">
+    <div *ngFor="let object of constantsService.constants | keyvalue" class="col-sm-auto align-top">
+      <h1 style="margin-left: -32px" class="font-weight-bold text-justify">{{ object.key }}</h1>
+      <img alt="full size" class="rounded float-end full-screen align-top" routerLink="/{{object.key}}"
+           src="assets/full_size.png">
+      <app-subsystem [constants]="object.value"></app-subsystem>
+    </div>
+  </div>
+  <div class="text-center" style="margin-top: 16px">
+    <button (click)="updateAllConstants()" class="btn btn-primary">Update All Constants</button>
+  </div>
+</div>

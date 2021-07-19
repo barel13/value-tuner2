@@ -1,0 +1,10 @@
+<div>
+  <img routerLink="/" alt="full size" class="rounded float-end fixed-top end" src="assets/exit_full_screen.jpg">
+  <h1 style="margin-left: 40px">{{ subsystem }}</h1>
+  <ul>
+    <li *ngFor="let constant of constants">
+      <app-constant [constant]="constant" [withArrows]="false" [withMargin]="false"></app-constant>
+    </li>
+  </ul>
+  <button style="margin-left: 36px" type="submit" (click)="updateAll()" class="btn btn-primary">Update All</button>
+</div>

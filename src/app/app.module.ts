@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {RouterModule, Routes} from '@angular/router';
 import {FullScreenComponent} from './full-screen/full-screen.component';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     DragDropModule,
+    NgApexchartsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [ConstantsService],

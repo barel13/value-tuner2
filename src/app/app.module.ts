@@ -14,6 +14,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {FullScreenComponent} from './full-screen/full-screen.component';
 import {FireLogComponent} from './fire-log/fireLog.component';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import {FireLogService} from './fire-log-service/fire-log.service';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -38,7 +39,7 @@ const routes: Routes = [
     NgApexchartsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ConstantsService],
+  providers: [ConstantsService, FireLogService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

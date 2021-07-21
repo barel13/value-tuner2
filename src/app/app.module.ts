@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {RouterModule, Routes} from '@angular/router';
 import {FullScreenComponent} from './full-screen/full-screen.component';
+import {FireLogComponent} from './fire-log/fireLog.component';
 import {NgApexchartsModule} from 'ng-apexcharts';
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
     HomeComponent,
     SubsystemComponent,
     ConstantComponent,
-    FullScreenComponent
+    FullScreenComponent,
+    FireLogComponent
   ],
   imports: [
     BrowserModule,

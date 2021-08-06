@@ -27,6 +27,7 @@
     "mathjs": "^9.4.1",
     "net": "^1.0.2",
     "ngx-drag-drop": "^2.0.0",
+    "party-js": "^2.0.1",
     "reconnecting-websocket": "^4.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

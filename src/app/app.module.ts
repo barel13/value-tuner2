@@ -11,11 +11,9 @@ import {ConstantComponent} from './constant/constant.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {RouterModule, Routes} from '@angular/router';
-import {FullScreenComponent} from './full-screen/full-screen.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: ':subsystem', component: FullScreenComponent}
+  {path: '', component: HomeComponent}
 ];
 
 @NgModule({
@@ -23,8 +21,7 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     SubsystemComponent,
-    ConstantComponent,
-    FullScreenComponent
+    ConstantComponent
   ],
   imports: [
     BrowserModule,

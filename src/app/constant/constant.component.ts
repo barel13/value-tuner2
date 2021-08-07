@@ -15,6 +15,7 @@ export interface Range {
 })
 export class ConstantComponent {
   @Input() constant: Constant;
+  @Input() name: string;
   @Input() withArrows = true;
   @Input() withMargin = true;
   public clicked = false;

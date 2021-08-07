@@ -33,3 +33,13 @@ $form-range-track-bg: rgba(0, 0, 0, 1.0);
 }
 
 
+.constant {
+  background: #222222;
+  color: #171717;
+  border: 1px solid #9b9b9b;
+  height: 100px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

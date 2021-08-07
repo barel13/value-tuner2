@@ -10,6 +10,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 export class SubsystemComponent implements OnInit {
   constantsArray: BaseConstant[];
   @Input() constants: Set<BaseConstant>;
+  @Input() name: string;
 
   moveConstant(event: CdkDragDrop<BaseConstant[]>): void {
     if (event.previousContainer === event.container) {

@@ -1,31 +1,9 @@
-<div (mouseenter)="hovered = true" (mouseleave)="hovered = false">
-  <div *ngIf="withMargin; else withoutMargin" style="margin-left: -40px">
-    {{ constant.key.keyName }}:
+<div class="constant">
+  <div class="form__group field">
+    <label [htmlFor]="constant.key.keyName + constant.key.subsystem" class="form__label"
+           [innerHTML]="constant.key.keyName"></label>
+    <input [id]="constant.key.keyName + constant.key.subsystem"
+           [name]="constant.key.keyName + constant.key.subsystem" [value]="constant.defaultValue"
+           class="form__field" placeholder="Name" type="text">
   </div>
-  <ng-template #withoutMargin>
-    {{ constant.key.keyName }}:
-  </ng-template>
-  <div class="input-group mb-sm-2" style="height: auto; width: 178px">
-    <img *ngIf="hovered && withArrows" alt="arrows" class="rounded mx-auto d-block arrows" src="assets/arrows.png">
-    <div *ngIf="constant.value != constant.defaultValue" class="input-group-append">
-      <button (click)="updateValue()" [disabled]="value.invalid && clicked" class="btn btn-primary"
-              id="update-button" type="button">Update
-      </button>
-    </div>
-    <input #value="ngModel" [ngModel]="constant.value" (ngModelChange)="valueString = $event" (focusout)="valueChanged()" [max]="range.max" [min]="range.min"
-           class="form-control" placeholder="Value">
-    <svg (click)="updateChevron()" class="bi bi-chevron-right chevron" fill="currentColor"
-         height="16" id="{{'chevron-'+constant.fullKey}}"
-         viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-        fill-rule="evenodd"/>
-    </svg>
-  </div>
-</div>
-<div *ngIf="clicked" style="margin-bottom: 16px">
-  <input [(ngModel)]="range.min" class="range-input" type="number"> &#8804; X &#8804;
-  <input [(ngModel)]="range.max" class="range-input" type="number">
-  <div *ngIf="value.invalid && clicked" style="font-size: 10px">The value must be between {{ range.min }}
-    and {{ range.max }}</div>
 </div>

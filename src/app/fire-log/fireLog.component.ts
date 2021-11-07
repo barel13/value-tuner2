@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -6,21 +6,23 @@ import {
   ApexFill,
   ApexMarkers,
   ApexStroke,
+  ApexTooltip,
   ApexXAxis,
-  ApexYAxis,
-  ChartComponent
+  ApexYAxis
 } from 'ng-apexcharts';
+import {FireLogService} from '../fire-log-service/fire-log.service';
 
 export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xAxis: ApexXAxis;
-  dataLabels: ApexDataLabels;
-  yAxis: ApexYAxis;
-  fill: ApexFill;
-  stroke: ApexStroke;
-  markers: ApexMarkers;
-  colors: string[];
+  series?: ApexAxisChartSeries;
+  chart?: ApexChart;
+  xaxis?: ApexXAxis;
+  dataLabels?: ApexDataLabels;
+  yaxis?: ApexYAxis;
+  fill?: ApexFill;
+  markers?: ApexMarkers;
+  tooltip?: ApexTooltip;
+  stroke?: ApexStroke;
+  colors?: string[];
 };
 
 @Component({
@@ -29,120 +31,82 @@ export type ChartOptions = {
   styleUrls: ['./fireLog.component.scss']
 })
 export class FireLogComponent implements OnInit, OnDestroy {
-  @ViewChild('chart') chart: ChartComponent;
-  public chartOptions1: Partial<ChartOptions>;
-  public chartOptions2: Partial<ChartOptions>;
+  public options: Partial<ChartOptions>;
 
-  constructor() {
-    this.chartOptions1 = {
-      series: [
-        {
-          name: 'series1',
-          data: this.generateDayWiseTimeSeries(
-            new Date('11 Feb 2017').getTime(),
-            185,
-            {
-              min: 30,
-              max: 90
-            }
-          )
-        }
-      ],
+  constructor(private service: FireLogService) {
+    const body = document.body;
+    const html = document.documentElement;
+    const height = 0.96 * Math.max(body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+    this.options = {
       chart: {
         id: 'chart2',
-        type: 'line',
-        height: 230,
+        type: 'area',
+        stacked: false,
+        width: '99%',
+        height,
+        zoom: {
+          type: 'x',
+          enabled: true,
+          autoScaleYaxis: true
+        },
         toolbar: {
-          autoSelected: 'pan',
-          show: false
+          autoSelected: 'zoom',
+          show: true
         }
       },
-      colors: ['#546E7A'],
-      stroke: {
-        width: 3
-      },
+      series: service.values,
       dataLabels: {
         enabled: false
       },
       fill: {
-        opacity: 1
+        type: 'gradient',
+        gradient: {
+          shadeIntensity: 1,
+          inverseColors: false,
+          opacityFrom: 0.5,
+          opacityTo: 0
+        }
+      },
+      tooltip: {
+        enabled: true,
+        shared: false,
+        followCursor: true,
+        x: {
+          formatter(val: number): string {
+            const time = new Date(val);
+            return time.getMinutes() + ':' + time.getSeconds();
+          }
+        }
       },
       markers: {
         size: 0
       },
-      xAxis: {
-        type: 'datetime'
-      }
-    };
-
-    this.chartOptions2 = {
-      series: [
-        {
-          name: 'series1',
-          data: this.generateDayWiseTimeSeries(
-            new Date('11 Feb 2017').getTime(),
-            185,
-            {
-              min: 30,
-              max: 90
-            }
-          )
-        }
-      ],
-      chart: {
-        id: 'chart1',
-        height: 130,
-        type: 'area',
-        brush: {
-          target: 'chart2',
-          enabled: true
-        },
-        selection: {
-          enabled: true,
-          xaxis: {
-            min: new Date('19 Jun 2017').getTime(),
-            max: new Date('14 Aug 2017').getTime()
+      xaxis: {
+        type: 'datetime',
+        labels: {
+          formatter(value: string): string | string[] {
+            const time = new Date(value);
+            return time.getMinutes() + ':' + time.getSeconds();
           }
         }
       },
-      colors: ['#008FFB'],
-      fill: {
-        type: 'gradient',
-        gradient: {
-          opacityFrom: 0.91,
-          opacityTo: 0.1
+      yaxis: {
+        labels: {
+          formatter(val: number): string | string[] {
+            return val.toString();
+          }
         }
-      },
-      xAxis: {
-        type: 'datetime',
-        tooltip: {
-          enabled: false
-        }
-      },
-      yAxis: {
-        tickAmount: 2
       }
     };
   }
 
-  public generateDayWiseTimeSeries(baseVal, count, yRange): any[] {
-    let i = 0;
-    const series = [];
-    while (i < count) {
-      const x = baseVal;
-      const y =
-        Math.floor(Math.random() * (yRange.max - yRange.min + 1)) + yRange.min;
-
-      series.push([x, y]);
-      baseVal += 86400000;
-      i++;
-    }
-    return series;
-  }
-
   ngOnInit(): void {
+    this.service.connect();
   }
 
   ngOnDestroy(): void {
+    this.service.disconnect();
   }
 }

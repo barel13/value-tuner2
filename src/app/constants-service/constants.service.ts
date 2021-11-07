@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BaseConstant, Constant, Utils} from '../models/BaseConstant';
-import {Observable, of} from 'rxjs';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import {HttpClient} from '@angular/common/http';
 
@@ -11,7 +10,6 @@ import {HttpClient} from '@angular/common/http';
 export class ConstantsService {
   private static readonly ENDPOINT = 'ws://localhost:8080/app';
   public constants = new Map<string, Set<Constant>>();
-  public state: Observable<number>;
   private webSocket: ReconnectingWebSocket;
   private serverEndpoint = 'http://localhost:8080/app';
 
@@ -19,7 +17,7 @@ export class ConstantsService {
   }
 
   public connect(): void {
-    this.constants.clear();
+    this.constants.clear(); // TODO: add functionality
 
     const shooter = new Set<Constant>();
     shooter.add(Utils.createConstant(Utils.createKey('hey', 'shooter'), 'shooter/hey', 38));
@@ -87,7 +85,6 @@ export class ConstantsService {
     this.constants.set('drivetrain', drivetrain);
 
     this.webSocket = new ReconnectingWebSocket(ConstantsService.ENDPOINT);
-    this.state = of(this.webSocket.readyState);
 
     this.webSocket.onopen = event => {
       console.log('Open: ' + event);

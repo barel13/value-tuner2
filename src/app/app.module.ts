@@ -3,22 +3,22 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {HomeComponent} from './home-page/home.component';
-import {ConstantsService} from './constants-service/constants.service';
-import {SubsystemComponent} from './subsystem/subsystem.component';
+import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {ConstantComponent} from './constant/constant.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {RouterModule, Routes} from '@angular/router';
-import {FullScreenComponent} from './full-screen/full-screen.component';
+
+import {HomeComponent} from './home-page/home.component';
+import {SubsystemComponent} from './subsystem/subsystem.component';
+import {ConstantComponent} from './constant/constant.component';
+import {ConstantsService} from './constants-service/constants.service';
+
 import {FireLogComponent} from './fire-log/fireLog.component';
-import {NgApexchartsModule} from 'ng-apexcharts';
 import {FireLogService} from './fire-log-service/fire-log.service';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: ':subsystem', component: FullScreenComponent}
+  {path: '', component: FireLogComponent}
 ];
 
 @NgModule({
@@ -27,7 +27,6 @@ const routes: Routes = [
     HomeComponent,
     SubsystemComponent,
     ConstantComponent,
-    FullScreenComponent,
     FireLogComponent
   ],
   imports: [
